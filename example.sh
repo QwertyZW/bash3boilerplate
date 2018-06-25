@@ -45,6 +45,11 @@ read -r -d '' __helptext <<-'EOF' || true # exits non-zero when EOF encountered
  parsed and will be added as-is to the help.
 EOF
 
+# work around an odd bug in the main script
+if [[ $# -eq 0 ]]; then
+    set -- "--help"
+fi
+
 # shellcheck source=main.sh
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/main.sh"
 
